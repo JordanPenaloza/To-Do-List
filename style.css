@@ -70,6 +70,7 @@ button > i {
     flex-direction: column;
     word-wrap: break-word;
     background-color: white;
+    color: black;
     padding: 10px;
     margin: auto;
     width: 50%;
@@ -134,4 +135,9 @@ button > i {
 
 .newItem:not(:empty) {
     border: 1px solid black; /* 1px width, solid style, black color */
+}
+
+.dark-mode {
+    background: #333;
+    color: #fff;
 }
