@@ -1,3 +1,5 @@
+const nukebutton = document.querySelector('.nukebutton');
+
 // Grabs text
 const textinput = document.querySelector('.textarea');
 // Grabs button input
@@ -67,6 +69,11 @@ function deleteItem(event) {
     }
 }
 
+function nukeItem() {
+    const items = document.querySelectorAll('.newItem');
+    items.forEach(item => item.remove());
+}
+
 function checkItem(event) {
     // the item focused is the item that was clicked on
     const item = event.target
@@ -76,6 +83,13 @@ function checkItem(event) {
        const todolistitem = item.parentElement
        // toggles the class 'checked' on or off
        todolistitem.classList.toggle('checked')
+    }
+
+}
+
+function enterKey(event) {
+    if (event.key === 'Enter') {
+        addItem(event);
     }
 }
 // Function to save the 
@@ -93,3 +107,6 @@ function checkItem(event) {
 buttoninput.addEventListener('click', clickButton)
 itemlist.addEventListener('click', deleteItem)
 itemlist.addEventListener('click', checkItem)
+textinput.addEventListener('keypress',enterKey)
+nukebutton.addEventListener('click', nukeItem);
+
