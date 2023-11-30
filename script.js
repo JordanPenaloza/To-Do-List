@@ -136,6 +136,7 @@ function handleDragEnd(event) {
 
 function darkToggle(event) {
     document.body.classList.toggle('dark-mode');
+    saveData();
 }
 
 
