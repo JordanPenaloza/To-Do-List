@@ -66,6 +66,7 @@ function addItem() {
         itemlist.appendChild(newItem);
         // reset the text in textbox to blank to prep next input
         textinput.value = '';
+        saveData();
     }
 }
 
@@ -78,6 +79,7 @@ function deleteItem(event) {
         const todolistitem = item.parentElement
         // remove item
         todolistitem.remove()
+        saveData();
     }
 }
 
@@ -90,6 +92,7 @@ function checkItem(event) {
        const todolistitem = item.parentElement
        // toggles the class 'checked' on or off
        todolistitem.classList.toggle('checked')
+       saveData();
     }
 }
 
@@ -123,6 +126,7 @@ function handleDrop(event) {
 
     // Remove the 'dragging' class from the dragged item
     draggedItem.classList.remove('dragging');
+    saveData();
 }
 
 function handleDragEnd(event) {
@@ -133,17 +137,16 @@ function handleDragEnd(event) {
 function darkToggle(event) {
     document.body.classList.toggle('dark-mode');
 }
-// Function to save the 
-// function saveData(){
-//     localStorage.setItem("data", todolist.innerHTML);
-// }
-// 
-// Function to show the data from
-// function showTask() {
-//     todolist.innerHTML = localStorage.getItem("data");
-//}
-//showTask();
-//
+
+
+function saveData(){
+    localStorage.setItem("data", itemlist.innerHTML);
+}
+
+function showTask() {
+    itemlist.innerHTML = localStorage.getItem("data");
+}
+
 // checks for button clicks
 buttoninput.addEventListener('click', clickButton)
 itemlist.addEventListener('click', deleteItem)
@@ -156,3 +159,4 @@ itemlist.addEventListener('drop', handleDrop);
 itemlist.addEventListener('dragend', handleDragEnd);
 
 darkModeToggle.addEventListener('click', darkToggle);
+showTask();
