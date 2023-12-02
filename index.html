@@ -1,8 +1,3 @@
-<!-- Cursor Parking Lot -->
-<!--                    -->
-<!--                    -->
-<!------------------------>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,33 +10,48 @@
 
         <!-- added for style.css-->
         <link rel="stylesheet" href="style.css">
+
+        <!-- added for fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+        <script src="script.js" defer></script>
     </head>
     
-    <body class="background">
-        <button id="dark-mode-toggle">Toggle Dark Mode (Temporary Look)</button>
-        <div class="title-container">
-            <h1> To Do List </h1>
-        </div>
-        <div class="container">
-            <div class="inputcol">
-                <input type="text" class="textarea" id="input-box" placeholder="Input here">
-                <input type="text" class="" id="" placeholder="Date">
-                <button type="button" class="buttoninput"> <i class="fa-solid fa-plus"></i> </button> <!-- For adding -->
-            </div>
-            <button type="button" class="nukebutton">Delete All</button> <!-- Deletes all items-->
-        </div>
-        <div class="todolist">
-            
-            <div class="newItem" draggable="true">
-                
-                
+    <body class="light-mode">
+        
+        <div id="main-container">            
+            <!-- List Wrapper -->
+            <div id="list-container" class="light-mode">
+                <button id="dark-mode-toggle"><i class="fa-solid fa-moon"></i></button>
+                <!-- List Title -->
+                <div id="title-container">
+                    <h1 id="title"> To Do List </h1>
+                </div>
+
+                <div id="separator"></div>
+
+                <div id="items-container">
+                    <!-- Items show up here -->
+                </div>
+
+                <div id="input-container">
+                    <div id="input-area">
+                        <input type="text" class="textarea" maxLength="30" id="input-area" placeholder="Input here">
+                        
+                    </div>
+                    <button type="button" class="add-new-item-btn"> <i class="fa-solid fa-plus fa-2xl"></i> </button> <!-- For adding -->
+                </div>
             </div> 
+
+            <button type="button" class="nukebutton">Delete All</button> <!-- Deletes all items-->
+            <!-- <img src="images/kanye.png" class="kanye" alt="kanye"> -->
+            <!-- <img src="images/fortnite.gif" class="fortnite"> -->
+            <!-- <img src="images/josh.jpg" class="josh"> -->
+
+            <footer id="footer"></footer>
         </div>
-        <!-- <img src="images/kanye.png" class="kanye" alt="kanye"> -->
-        <!-- <img src="images/fortnite.gif" class="fortnite"> -->
-        <!-- <img src="images/josh.jpg" class="josh"> -->
-        <p>19 dollar fortnite card</p>
-        <p>insert whistling ' 3'~~</p>
-    <script src="script.js" defer></script>
     </body>
 </html>
