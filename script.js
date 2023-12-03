@@ -1,6 +1,8 @@
 const nukebutton = document.querySelector('.nukebutton');
 // Grabs text
 const textinput = document.querySelector('.textarea');
+// Grabs date
+const dateinput = document.querySelector('#date-picker');
 // Grabs button input
 const buttoninput = document.querySelector('.add-new-item-btn');
 // Grabs the list of items in todo list
@@ -54,13 +56,23 @@ function addItem() {
         // add the itemContent to the newItem div
         newItem.appendChild(itemContent);
 
-        // // Create a date input field
-        // const dateInput = document.createElement('input');
-        // dateInput.setAttribute('type', 'date');
-        // // Add a class for styling
-        // dateInput.classList.add('date-input'); 
-        // // Add the dateInput to the newItem
-        // newItem.appendChild(dateInput);      
+
+        // creates an element for the text in our item
+        const userDate = document.getElementById('date-picker').value;
+        const itemDate = document.createElement('p');
+        // adds a class 'item' to the element
+        itemDate.classList.add('itemDate');
+        // the text of the element 'p' is what the text is in our query selector
+        var selectedDate = new Date(userDate);
+        if (!isNaN(selectedDate.getTime())) {
+            itemDate.innerText = selectedDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit'
+            });
+            // add the itemContent to the newItem div
+            newItem.appendChild(itemDate);
+        }
 
         // creates a button to delete items
         const trashbutton = document.createElement("button");
@@ -68,13 +80,20 @@ function addItem() {
         trashbutton.innerHTML = '<i class="fa-solid fa-trash btn"></i>';
         // adds class
         trashbutton.classList.add("trash-button");
+
+        trashbutton.classList.toggle('dark-mode', document.body.classList.contains('dark-mode'));
+
         // add trashbutton to the newItem
         newItem.appendChild(trashbutton);
 
         // add the new item to the list of items
         itemlist.appendChild(newItem);
+
+        newItem.classList.toggle('dark-mode', document.body.classList.contains('dark-mode'));
+
         // reset the text in textbox to blank to prep next input
         textinput.value = '';
+        dateinput.value = '';
 
         gsap.to("#list-container, .newItem", .3, {paddingBottom: 30, ease: Back.easeOut})
         gsap.to("#list-container, .newItem", .3, {delay: .15, paddingBottom: 8, y: 0, ease: Back.easeOut})
@@ -108,7 +127,7 @@ function moveDiv() {
     }, 325);
 
     var animation = div.animate(
-      [{ top: '-500px' }, { top: screenHeight * 2 - div.clientHeight + 'px'}],
+      [{ top: '-500px' }, { top: screenHeight * 1.85 - div.clientHeight + 'px'}],
       {
         duration: 750, // adjust the duration as needed
         iterations: 1,
@@ -120,6 +139,8 @@ function moveDiv() {
 function nukeItem() {
     const items = document.querySelectorAll('.newItem');
     items.forEach(item => item.remove());
+
+    localStorage.removeItem("data");
 }
 
 function checkItem(event) {
@@ -181,10 +202,23 @@ function handleDragEnd(event) {
 
 function darkToggle(event) {
     document.body.classList.toggle('dark-mode');
+    document.querySelector('#movingDiv').classList.toggle('dark-mode');
     document.getElementById('list-container').classList.toggle('dark-mode');
     document.getElementById('title').classList.toggle('dark-mode');
-    document.querySelector('.newItem').classList.toggle('dark-mode');
-    document.querySelector('.trash-button').classList.toggle('dark-mode');
+
+    const newItems = document.querySelectorAll('.newItem');
+    const trashButtons = document.querySelectorAll('.trash-button');
+
+    newItems.forEach((item) => {
+        item.classList.toggle('dark-mode');
+    });
+
+    trashButtons.forEach((item) => {
+        item.classList.toggle('dark-mode');
+    });
+
+    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+
     saveData();
 }
 
@@ -194,6 +228,14 @@ function saveData(){
 }
 
 function showTask() {
+    // Retrieve the theme from localStorage
+    const savedTheme = localStorage.getItem('theme');
+
+    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+    document.querySelector('#movingDiv').classList.toggle('dark-mode', savedTheme === 'dark');
+    document.getElementById('list-container').classList.toggle('dark-mode', savedTheme === 'dark');
+    document.getElementById('title').classList.toggle('dark-mode', savedTheme === 'dark');
+
     itemlist.innerHTML = localStorage.getItem("data");
 }
 
@@ -202,6 +244,7 @@ buttoninput.addEventListener('click', clickButton)
 itemlist.addEventListener('click', deleteItem)
 itemlist.addEventListener('click', checkItem)
 textinput.addEventListener('keypress',enterKey)
+dateinput.addEventListener('keypress',enterKey)
 
 // nuke all items
 // nukebutton.addEventListener('click', nukeItem);

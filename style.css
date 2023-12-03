@@ -25,14 +25,13 @@ body{
     font-family: var(--font);
     font-size: 1.4rem;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: background .5s ease;
-    overflow: scroll;
 }
 
 body.dark-mode {
@@ -41,7 +40,7 @@ body.dark-mode {
 
 #movingDiv {
     position: absolute;
-    top: -500px;
+    top: -1000px;
     left: 50%;
     transform: translateX(-50%);
     width: 125vw;
@@ -51,8 +50,14 @@ body.dark-mode {
     color: #fff;
     text-align: center;
     line-height: 50px;
-    z-index: 15;
-  }
+    z-index: 99;
+}
+
+#movingDiv.dark-mode {
+    background-color: var(--dark-background2);
+}
+
+
 
 #list-container{
     background: var(--light-background2);
@@ -101,7 +106,7 @@ body.dark-mode {
 }
 
 .newItem {
-    position: relative;
+    /* position: relative; */
     width: 100%;
     padding: 9px 0;
     display: flex;
@@ -109,6 +114,23 @@ body.dark-mode {
     font-size: 18px;
     font-family: var(--font);
     margin: 0;
+    color: var(--light-title-text);
+    transition: .3s;
+}
+
+.newItem.dark-mode {
+    color: var(--dark-title-text);
+}
+
+.itemDate {
+    font-size: 14px;
+    position: absolute;
+    top: 35px;
+    left: 43px;
+}
+
+.itemContent {
+    font-size: 18px;
 }
 
 .trash-button{
@@ -119,6 +141,11 @@ body.dark-mode {
     background: transparent;
     border: none;
     cursor: pointer;
+    transition: .3s;
+}
+
+.trash-button.dark-mode {
+    color: white;
 }
 
 .check-button {
@@ -131,34 +158,42 @@ body.dark-mode {
 }
 
 
-#input-container {
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-}
 
 #input-area {
-    font-family: var(--font);
-    font-size: 16px;
-    font-weight: 600;
-    width: 100%; 
-    border: 0;
-    border-radius: 9px;
-    padding: 12px 60px 12px 18px;
-    border-radius: 22px;
-    position: relative;
-    background: var(--white);
+    padding: 24px 48px 24px 48px;
+    display: flex;
+    background-color: var(--white);
+}
+
+#item-input {
+    display: inline-block;
+    font: var(--font);
+    background: transparent;
+    border: none;
+    color: grey;
+}
+
+#item-input.dark-mode {
+    color: white;  
+}
+
+#date-picker {
+    display: inline-block;
+    background: transparent;
+    border: none;
+    color: grey;
+    font: var(--font);
+}
+
+#date-picker.dark-mode {
+    color: white;
 }
 
 .add-new-item-btn {
-    height: 100%;
-    float: right;
     padding: 0 18px;
     border: none;
     color: var(--red);
     background: var(--white);
-    border-radius: 22px;
 }
 
 button > i {
@@ -176,6 +211,7 @@ button > i {
     left: 50%;
     transform: translate(-50%, 25%);
     padding: 10px;
+    z-index: 1;
 }
 
 .checked{
