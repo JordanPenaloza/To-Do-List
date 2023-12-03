@@ -39,6 +39,20 @@ body.dark-mode {
     background: var(--dark-background);
 }
 
+#movingDiv {
+    position: absolute;
+    top: -500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 125vw;
+    height: 500px;
+    rotate: 10deg;
+    background-color: white;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    z-index: 15;
+  }
 
 #list-container{
     background: var(--light-background2);

@@ -99,6 +99,24 @@ function deleteItem(event) {
     }
 }
 
+function moveDiv() {
+    var div = document.getElementById('movingDiv');
+    var screenHeight = window.innerHeight;
+    
+    setTimeout(function() {
+        nukeItem();
+    }, 325);
+
+    var animation = div.animate(
+      [{ top: '-500px' }, { top: screenHeight * 2 - div.clientHeight + 'px'}],
+      {
+        duration: 750, // adjust the duration as needed
+        iterations: 1,
+        easing: 'ease-in-out'
+      }
+    );
+}
+
 function nukeItem() {
     const items = document.querySelectorAll('.newItem');
     items.forEach(item => item.remove());
@@ -184,7 +202,10 @@ buttoninput.addEventListener('click', clickButton)
 itemlist.addEventListener('click', deleteItem)
 itemlist.addEventListener('click', checkItem)
 textinput.addEventListener('keypress',enterKey)
-nukebutton.addEventListener('click', nukeItem);
+
+// nuke all items
+// nukebutton.addEventListener('click', nukeItem);
+nukebutton.addEventListener('click', moveDiv);
 
 
 //drag and drop event listeners
