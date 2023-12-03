@@ -157,8 +157,6 @@ body.dark-mode {
     border: none;
 }
 
-
-
 #input-area {
     padding: 24px 48px 24px 48px;
     display: flex;
@@ -217,6 +215,11 @@ button > i {
 .checked{
     color: #27FDC7;
     text-decoration: line-through;
+}
+
+.checked.dark-mode {
+    color: #27FDC7; /* Dark mode background color */
+    /* Add other styles as needed */
 }
 
 .newItem.dragging {
